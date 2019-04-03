@@ -1,9 +1,9 @@
 <?php
 
 $host="localhost";
-$user="eavnicom_eavni";
-$pass="jePuc-*qO9";
-$db="eavnicom_sadna";
+$user=;
+$pass=";
+$db=";
 session_start();
 if(!isset($_SESSION['userName']))
 {
