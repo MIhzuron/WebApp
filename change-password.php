@@ -5,10 +5,7 @@ require_once('config.php');
 header('Content-type: text/html; charset=UTF-8');
 
 
-$conn=new mysqli($host,$user,$pass,$db);
-$conn->set_charset("utf8");
-if ($conn->connect_error){
-die("Connection failed: ".$conn->connect_error);} //end-connect to db
+
 
 
 if(isset($_POST['newPassSubmit'])) //the user has entered a new pass- lets update it
