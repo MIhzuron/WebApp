@@ -8,14 +8,12 @@ header("Location:login.php");
     exit();
 }
 
-$conn=new mysqli($host,$user,$pass,$db);
-$conn->set_charset("utf8");
-if ($conn->connect_error){
-die("Connection failed: ".$conn->connect_error);}
+
+
 if(isset($_GET['payment'])&&($_GET['username'])&&($_GET['postid']))
 {
     $userName=$_GET['username'];
-   $sql = "UPDATE posts SET paidUser='".$userName."' ,paid=1
+   $sql = "UPDATE posts SET paidUser='".$userName."' ,paid=1, datePaid=CURDATE()
       WHERE id='".$_GET['postid']."'
       "; 
        if (mysqli_query($conn, $sql))

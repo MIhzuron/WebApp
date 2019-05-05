@@ -8,10 +8,7 @@ header("Location:login.php");
     exit();
 }
 
-$conn=new mysqli($host,$user,$pass,$db);
-$conn->set_charset("utf8");
-if ($conn->connect_error){
-die("Connection failed: ".$conn->connect_error);}
+
 
 $sql="SELECT * FROM users WHERE userName=?";
        $stmt=mysqli_stmt_init($conn);
@@ -41,13 +38,21 @@ $sql="SELECT * FROM users WHERE userName=?";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     <title>Preadmin - Bootstrap Admin Template</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <!--פונט חדש >
+   
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+       -->
     <!--[if lt IE 9]>
+    
+  
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
@@ -169,194 +174,29 @@ $sql="SELECT * FROM users WHERE userName=?";
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="menu-title">Main</li>
-                        <li>
-                            <a href="index.html"><i class="fa fa-dashboard"></i> דשבורד</a>
+                        <li class="menu-title">
+                            ניווט
                         </li>
                         <li>
-                            <a href="chat.html"><i class="fa fa-comments" aria-hidden="true"></i> Chat <span class="badge badge-pill bg-primary pull-right">5</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-video-camera camera" aria-hidden="true"></i> <span> Calls</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="voice-call.html">Voice Call</a></li>
-                                <li><a href="video-call.html">Video Call</a></li>
-                                <li><a href="incoming-call.html">Incoming Call</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> <span> Email</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="compose.html">Compose Mail</a></li>
-                                <li><a href="inbox.html">Inbox</a></li>
-                                <li><a href="mail-view.html">Mail View</a></li>
-                            </ul>
+                            <a href="index.php"><i class="fa fa-dashboard"></i> דשבורד</a>
                         </li>
                         <li>
-                            <a href="contacts.html"><i class="fa fa-address-card" aria-hidden="true"></i> Contacts</a>
+                            <a href="feed.php"><i class="fa fa-recycle" aria-hidden="true"></i><b>פיד </b></a>
                         </li>
                         <li>
-                            <a href="tasks.html"><i class="fa fa-tasks" aria-hidden="true"></i> Tasks</a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-details.html">Blog View</a></li>
-                            </ul>
+                             <a href="myPosts.php"><i class="fa fa-dashboard"></i>
+                             מיחזורים שפרסמתי
+                             </a>
                         </li>
                         <li>
-                            <a href="tickets.html"><i class="fa fa-ticket" aria-hidden="true"></i> Tickets</a>
+                             <a href="paidRec.php"><i class="fa fa-dashboard"></i>
+                                מחזורים שקניתי
+                             </a>
                         </li>
-                        <li>
-                            <a href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                        </li>
-                        <li class="menu-title">UI Elements</li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-laptop" aria-hidden="true"></i> <span> Components</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="uikit.html">UI Kit</a></li>
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="tabs.html">Tabs</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="widgets.html"><i class="fa fa-th" aria-hidden="true"></i> Widgets</a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-edit" aria-hidden="true"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-                                <li><a href="form-input-groups.html">Input Groups</a></li>
-                                <li><a href="form-horizontal.html">Horizontal Form</a></li>
-                                <li><a href="form-vertical.html">Vertical Form</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-table" aria-hidden="true"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="tables-basic.html">Basic Tables</a></li>
-                                <li><a href="tables-datatables.html">Data Table</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="calendar.html"><i class="fa fa-calendar" aria-hidden="true"></i> Calendar</a>
-                        </li>
-                        <li class="menu-title">Extras</li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-columns" aria-hidden="true"></i> <span>Pages</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="login.html"> Login </a></li>
-                                <li><a href="register.html"> Register </a></li>
-                                <li><a href="forgot-password.html"> Forgot Password </a></li>
-                                <li><a href="change-password2.html"> Change Password </a></li>
-                                <li><a href="lock-screen.html"> Lock Screen </a></li>
-                                <li><a class="active" href="profile.html"> Profile </a></li>
-                                <li><a href="gallery.html"> Gallery </a></li>
-                                <li><a href="pricing.html">Pricing</a></li>
-                                <li><a href="error-404.html">404 Error </a></li>
-                                <li><a href="error-500.html">500 Error </a></li>
-                                <li><a href="coming-soon.html">Coming Soon </a></li>
-                                <li><a href="blank-page.html"> Blank Page </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="noti-dot"><i class="fa fa-rocket" aria-hidden="true"></i> <span>CRM </span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li class="submenu">
-                                    <a href="#" class="noti-dot"><span> Employees</span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="employees.html">All Employees</a></li>
-                                        <li><a href="holidays.html">Holidays</a></li>
-                                        <li><a href="leaves.html"><span>Leave Requests</span> <span class="badge badge-pill bg-primary pull-right">1</span></a></li>
-                                        <li><a href="attendance.html">Attendance</a></li>
-                                        <li><a href="departments.html">Departments</a></li>
-                                        <li><a href="designations.html">Designations</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="clients.html">Clients</a>
-                                </li>
-                                <li>
-                                    <a href="projects.html">Projects</a>
-                                </li>
-                                <li>
-                                    <a href="tasks.html">Tasks</a>
-                                </li>
-                                <li>
-                                    <a href="leads.html">Leads</a>
-                                </li>
-                                <li class="submenu">
-                                    <a href="#"><span> Accounts </span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="estimates.html">Estimates</a></li>
-                                        <li><a href="invoices.html">Invoices</a></li>
-                                        <li><a href="payments.html">Payments</a></li>
-                                        <li><a href="expenses.html">Expenses</a></li>
-                                        <li><a href="provident-fund.html">Provident Fund</a></li>
-                                        <li><a href="taxes.html">Taxes</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="#"><span> Payroll </span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="salary.html"> Employee Salary </a></li>
-                                        <li><a href="salary-view.html"> Payslip </a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="worksheet.html">Timing Sheet</a>
-                                </li>
-                                <li>
-                                    <a href="assets.html">Assets</a>
-                                </li>
-                                <li>
-                                    <a href="activities.html">Activities</a>
-                                </li>
-                                <li>
-                                    <a href="users.html">Users</a>
-                                </li>
-                                <li class="submenu">
-                                    <a href="#"><span> Reports </span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="expense-reports.html"> Expense Report </a></li>
-                                        <li><a href="invoice-reports.html"> Invoice Report </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Ecommerce</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="products.html"> Products </a></li>
-                                <li><a href="products-list.html"> Products List </a></li>
-                                <li><a href="product-details.html"> Product Details </a></li>
-                                <li><a href="add-product.html"> Add Product </a></li>
-                                <li><a href="edit-product.html"> Edit Product </a></li>
-                                <li><a href="orders.html"> Orders </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);"><i class="fa fa-share-alt" aria-hidden="true"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><span>Level 1</span> <span class="menu-arrow"></span></a>
-                                    <ul style="display: none;">
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                        <li class="submenu">
-                                            <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
-                                            <ul class="list-unstyled" style="display: none;">
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><span>Level 1</span></a>
-                                </li>
-                            </ul>
+                        <li class="active">
+                             <a href="profile.php"><i class="fa fa-dashboard"></i>
+                            הפרופיל שלי            
+                             </a>
                         </li>
                     </ul>
                 </div>
@@ -387,16 +227,20 @@ $sql="SELECT * FROM users WHERE userName=?";
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
                                                 <h3 class="user-name m-t-0 m-b-0"><?php echo $userName; ?></h3>
-                                                <small class="text-muted">Web Designer</small>
+                                                <small class="text-muted">Web Designer</small> <br>
+                                               <div class="staff-id">  <i class="fas fa-baby-carriage"></i>	&nbsp;	&nbsp;	&nbsp; 	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;:level </div>    
                                                 <div class="staff-id">Employee ID : FT-0001</div>
                                                 <div class="staff-msg"><a href="chat.html" class="btn btn-primary">שלח הודעה</a></div>
+                                              
                                             </div>
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
+                                                
                                                 <li>
                                                     <span class="title">מספר סלולרי:</span>
                                                     <span class="text"><a href="">9876543210</a></span>
+                                                    
                                                 </li>
                                                 <li>
                                                     <span class="title">כתובת מייל:</span>

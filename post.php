@@ -8,10 +8,29 @@ header("Location:login.php");
     exit();
 }
 
-$conn=new mysqli($host,$user,$pass,$db);
-$conn->set_charset("utf8");
-if ($conn->connect_error){
-die("Connection failed: ".$conn->connect_error);}
+$sql="SELECT * FROM users WHERE userName=?";
+       $stmt=mysqli_stmt_init($conn);
+      if(!mysqli_stmt_prepare($stmt,$sql))
+        {
+             header('location: login.php?error=sqlerror');
+       exit();
+            
+        }
+        else
+        {
+            
+            mysqli_stmt_bind_param($stmt,"s",$_SESSION['userName']);
+            mysqli_stmt_execute($stmt);
+            $result=mysqli_stmt_get_result($stmt);
+            
+            if($row=mysqli_fetch_assoc($result))
+            {
+                $userName= $row['userName'];
+                $email=$row['email'];
+                $path=$row['profilePic'];
+            }
+          
+       }
 
 if(isset($_POST['pay']))
 {
@@ -26,6 +45,7 @@ if(isset($_POST['pay']))
 }
 
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,7 +54,7 @@ if(isset($_POST['pay']))
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <title>Preadmin - Bootstrap Admin Template</title>
+    <title>תשלום</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -61,7 +81,7 @@ if(isset($_POST['pay']))
                 </a>
             </div>
             <div class="page-title-box pull-left">
-                <h3>Preadmin</h3>
+                <h3>מיחזורון</h3>
             </div>
             <a id="mobile_btn" class="mobile_btn pull-left" href="#sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <ul class="nav user-menu pull-right">
@@ -137,20 +157,34 @@ if(isset($_POST['pay']))
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-primary pull-right">8</span></a>
-                </li>
-                <li class="nav-item dropdown has-arrow">
+              
+         <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                        <span class="user-img"><img class="rounded-circle" src=
+						        <?php
+                                    if($path !=NULL)
+                                    {
+                                        echo "$path";
+                                    }
+                                    else
+                                    {
+                                        echo  "assets/img/user.jpg" ;
+                                    }
+                                    ?>
+                        width="40" alt="Admin">
 							<span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span>
+                            <?php
+                            echo $userName;
+                            
+                            ?>
+                        </span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
+						<a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
+						<a class="dropdown-item" href="settings.php">הגדרות</a>
+						<a class="dropdown-item" href="login.php">התנתק</a>
 					</div>
                 </li>
             </ul>
@@ -166,196 +200,31 @@ if(isset($_POST['pay']))
         </div>
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
+                      <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="menu-title">Main</li>
-                        <li>
-                              <a href="index.php"><i class="fa fa-dashboard"></i> דשבורד</a>
+                   <li class="menu-title">
+                            ניווט
                         </li>
                         <li>
-                            <a href="chat.html"><i class="fa fa-comments" aria-hidden="true"></i> Chat <span class="badge badge-pill bg-primary pull-right">5</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-video-camera camera" aria-hidden="true"></i> <span> Calls</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="voice-call.html">Voice Call</a></li>
-                                <li><a href="video-call.html">Video Call</a></li>
-                                <li><a href="incoming-call.html">Incoming Call</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> <span> Email</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="compose.html">Compose Mail</a></li>
-                                <li><a href="inbox.html">Inbox</a></li>
-                                <li><a href="mail-view.html">Mail View</a></li>
-                            </ul>
+                            <a href="index.php"><i class="fa fa-dashboard"></i> דשבורד</a>
                         </li>
                         <li>
-                            <a href="feed.php"><i class="fa fa-recycle" aria-hidden="true"></i>פיד</a>
+                            <a href="feed.php"><i class="fa fa-recycle" aria-hidden="true"></i><b>פיד </b></a>
                         </li>
                         <li>
-                            <a href="tasks.html"><i class="fa fa-tasks" aria-hidden="true"></i> Tasks</a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-details.html">Blog View</a></li>
-                            </ul>
+                             <a href="myPosts.php"><i class="fa fa-dashboard"></i>
+                             מיחזורים שפרסמתי
+                             </a>
                         </li>
                         <li>
-                            <a href="tickets.html"><i class="fa fa-ticket" aria-hidden="true"></i> Tickets</a>
+                             <a href="paidRec.php"><i class="fa fa-dashboard"></i>
+                                מחזורים שקניתי
+                             </a>
                         </li>
-                        <li>
-                            <a href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                        </li>
-                        <li class="menu-title">UI Elements</li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-laptop" aria-hidden="true"></i> <span> Components</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="uikit.html">UI Kit</a></li>
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="tabs.html">Tabs</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="widgets.html"><i class="fa fa-th" aria-hidden="true"></i> Widgets</a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-edit" aria-hidden="true"></i> <span> Forms</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-                                <li><a href="form-input-groups.html">Input Groups</a></li>
-                                <li><a href="form-horizontal.html">Horizontal Form</a></li>
-                                <li><a href="form-vertical.html">Vertical Form</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-table" aria-hidden="true"></i> <span> Tables</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="tables-basic.html">Basic Tables</a></li>
-                                <li><a href="tables-datatables.html">Data Table</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="calendar.html"><i class="fa fa-calendar" aria-hidden="true"></i> Calendar</a>
-                        </li>
-                        <li class="menu-title">Extras</li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-columns" aria-hidden="true"></i> <span>Pages</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="login.html"> Login </a></li>
-                                <li><a href="register.html"> Register </a></li>
-                                <li><a href="forgot-password.html"> Forgot Password </a></li>
-                                <li><a href="change-password2.html"> Change Password </a></li>
-                                <li><a href="lock-screen.html"> Lock Screen </a></li>
-                                <li><a href="profile.html"> Profile </a></li>
-                                <li><a href="gallery.html"> Gallery </a></li>
-                                <li> <a href="pricing.html">Pricing</a></li>
-                                <li><a href="error-404.html">404 Error </a></li>
-                                <li><a href="error-500.html">500 Error </a></li>
-                                <li><a href="coming-soon.html">Coming Soon </a></li>
-                                <li><a href="blank-page.html"> Blank Page </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="noti-dot"><i class="fa fa-rocket" aria-hidden="true"></i> <span>CRM </span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li class="submenu">
-                                    <a href="#" class="noti-dot"><span> Employees</span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="employees.html">All Employees</a></li>
-                                        <li><a href="holidays.html">Holidays</a></li>
-                                        <li><a href="leaves.html"><span>Leave Requests</span> <span class="badge badge-pill bg-primary pull-right">1</span></a></li>
-                                        <li><a href="attendance.html">Attendance</a></li>
-                                        <li><a href="departments.html">Departments</a></li>
-                                        <li><a href="designations.html">Designations</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="clients.html">Clients</a>
-                                </li>
-                                <li>
-                                    <a href="projects.html">Projects</a>
-                                </li>
-                                <li>
-                                    <a href="tasks.html">Tasks</a>
-                                </li>
-                                <li>
-                                    <a href="leads.html">Leads</a>
-                                </li>
-                                <li class="submenu">
-                                    <a href="#"><span> Accounts </span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="estimates.html">Estimates</a></li>
-                                        <li><a href="invoices.html">Invoices</a></li>
-                                        <li><a href="payments.html">Payments</a></li>
-                                        <li><a href="expenses.html">Expenses</a></li>
-                                        <li><a href="provident-fund.html">Provident Fund</a></li>
-                                        <li><a href="taxes.html">Taxes</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="#"><span> Payroll </span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="salary.html"> Employee Salary </a></li>
-                                        <li><a href="salary-view.html"> Payslip </a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="worksheet.html">Timing Sheet</a>
-                                </li>
-                                <li>
-                                    <a href="assets.html">Assets</a>
-                                </li>
-                                <li>
-                                    <a href="activities.html">Activities</a>
-                                </li>
-                                <li>
-                                    <a href="users.html">Users</a>
-                                </li>
-                                <li class="submenu">
-                                    <a href="#"><span> Reports </span> <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled" style="display: none;">
-                                        <li><a href="expense-reports.html"> Expense Report </a></li>
-                                        <li><a href="invoice-reports.html"> Invoice Report </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Ecommerce</span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled" style="display: none;">
-                                <li><a href="products.html"> Products </a></li>
-                                <li><a href="products-list.html"> Products List </a></li>
-                                <li><a class="active" href="product-details.html"> Product Details </a></li>
-                                <li><a href="add-product.html"> Add Product </a></li>
-                                <li><a href="edit-product.html"> Edit Product </a></li>
-                                <li><a href="orders.html"> Orders </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);"><i class="fa fa-share-alt" aria-hidden="true"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><span>Level 1</span> <span class="menu-arrow"></span></a>
-                                    <ul style="display: none;">
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                        <li class="submenu">
-                                            <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
-                                            <ul class="list-unstyled" style="display: none;">
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><span>Level 1</span></a>
-                                </li>
-                            </ul>
+                         <li>
+                             <a href="profile.php"><i class="fa fa-dashboard"></i>
+                            הפרופיל שלי            
+                             </a>
                         </li>
                     </ul>
                 </div>
@@ -365,7 +234,7 @@ if(isset($_POST['pay']))
             <div class="content container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="page-title">Product Details</h4>
+                        <h4 class="page-title">פרטי הקנייה שלך</h4>
                     </div>
                 </div>
                 <div class="card-box">
@@ -465,123 +334,7 @@ if(isset($_POST['pay']))
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <ul class="nav nav-tabs nav-tabs-bottom">
-                                <li class="nav-item"><a class="nav-link active" href="#product_desc" data-toggle="tab">Description</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#product_reviews" data-toggle="tab">Reviews</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane show active" id="product_desc">
-                                    <div class="product-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-                                        <blockquote class="blockquote">
-                                            <p class="mb-0">Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.</p>
-                                        </blockquote>
-                                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="product_reviews">
-                                    <div class="product-reviews">
-                                        <h3>Reviews (3)</h3>
-                                        <ul class="review-list">
-                                            <li>
-                                                <div class="review">
-                                                    <div class="review-author">
-                                                        <img class="avatar" alt="" src="assets/img/user.jpg">
-                                                    </div>
-                                                    <div class="review-block">
-                                                        <div class="review-by">
-                                                            <span class="review-author-name">Diana Bailey</span>
-                                                            <div class="rating">
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star-o"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui.</p>
-                                                        <span class="review-date">December 6, 2017</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review">
-                                                    <div class="review-author">
-                                                        <img class="avatar" alt="" src="assets/img/user.jpg">
-                                                    </div>
-                                                    <div class="review-block">
-                                                        <div class="review-by">
-                                                            <span class="review-author-name">Marie Wells</span>
-                                                            <div class="rating">
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                        <span class="review-date">December 11, 2017</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review">
-                                                    <div class="review-author">
-                                                        <img class="avatar" alt="" src="assets/img/user.jpg">
-                                                    </div>
-                                                    <div class="review-block">
-                                                        <div class="review-by">
-                                                            <span class="review-author-name">Pamela Curtis</span>
-                                                            <div class="rating">
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star rated"></i>
-                                                                <i class="fa fa-star-o"></i>
-                                                                <i class="fa fa-star-o"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                        <span class="review-date">December 13, 2017</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="all-reviews">
-                                            <button type="button" class="btn btn-primary">View All Reviews</button>
-                                        </div>
-                                    </div>
-                                    <div class="product-write-review">
-                                        <h3>Write Review</h3>
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-sm-8">
-                                                    <div class="form-group">
-                                                        <label>Name <span class="text-red">*</span></label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Your email address <span class="text-red">*</span></label>
-                                                        <input type="email" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Rating <span class="text-red">*</span></label>
-                                                        <div class="rating">
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star rated"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Review Comments</label>
-                                                        <textarea rows="4" class="form-control"></textarea>
-                                                    </div>
-                                                    <div class="review-submit">
-                                                        <input type="submit" value="Submit" class="btn">
-                                                    </div>
+                           
                                                 </div>
                                             </div>
                                         </form>

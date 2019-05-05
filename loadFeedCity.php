@@ -8,10 +8,8 @@ header("Location:login.php");
     exit();
 }
 $userName=$_SESSION['userName'];
-$conn=new mysqli($host,$user,$pass,$db);
-$conn->set_charset("utf8");
-if ($conn->connect_error){
-die("Connection failed: ".$conn->connect_error);}
+
+
 $sql="SELECT * FROM users WHERE userName=?";
        $stmt=mysqli_stmt_init($conn);
       if(!mysqli_stmt_prepare($stmt,$sql))
@@ -91,7 +89,7 @@ $sql="SELECT * FROM users WHERE userName=?";
 
                                                                            <form method="post" action="post.php">
                                                                            <input type="hidden" name="postId" value='.$row['id'].'>
-                                                                            <button  style="float:left;" class="btn btn-primary" type="submit" name="pay" id="pay">שלם
+                                                                               <button  style="position: relative;float:left; bottom:30px;display:inline;" class="btn btn-primary" type="submit" name="pay" id="pay">שלם
                                                                                 <i class="fas fa-wine-bottle"></i>
                                                                                     
                                                                             </button> </span>
