@@ -29,6 +29,11 @@ $sql="SELECT * FROM users WHERE userName=?";
             {
                 $userName= $row['userName'];
                 $email=$row['email'];
+                $tel=$row['tel'];
+                $city=$row['city'];
+                $street=$row['street'];
+                $streetnum=$row['houseNumber'];
+                $path=$row['profilePic'];
             }
        }
 ?>
@@ -40,7 +45,7 @@ $sql="SELECT * FROM users WHERE userName=?";
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <title>Preadmin - Bootstrap Admin Template</title>
+    <title>פרופיל אישי</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -62,8 +67,8 @@ $sql="SELECT * FROM users WHERE userName=?";
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="index.html" class="logo">
-                    <img src="assets/img/logo.png" width="40" height="40" alt="">
+                <a href="index.php" class="logo">
+                   <img src="assets/img/logo2.jpg" width="60" height="50" alt="">
                 </a>
             </div>
             <div class="page-title-box pull-left">
@@ -143,59 +148,80 @@ $sql="SELECT * FROM users WHERE userName=?";
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-primary pull-right">8</span></a>
-                </li>
-                <li class="nav-item dropdown has-arrow">
+                
+     <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                        <span class="user-img">
+							<img class="rounded-circle" src=
+							        <?php
+                                    if($path !=NULL)
+                                    {
+                                        echo "$path";
+                                    }
+                                    else
+                                    {
+                                        echo  "assets/img/user.jpg" ;
+                                    }
+                                    ?>
+                        width="40" alt="Admin">
 							<span class="status online"></span></span>
-                        <span>Admin</span>
+						</span>
+						<span><?php
+          echo $userName;
+          ?></span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">הפרופיל שלי</a>
-						<a class="dropdown-item" href="edit-profile.html">עריכת פרופיל</a>
-						<a class="dropdown-item" href="settings.html">הגדרות</a>
-						<a class="dropdown-item" href="login.html">התנתק</a>
+					    
+						<a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
+						<a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
+						
+						<a class="dropdown-item" href="login.php">התנתק</a>
+						
 					</div>
                 </li>
             </ul>
             <div class="dropdown mobile-user-menu pull-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">הפרופיל שלי</a>
-                    <a class="dropdown-item" href="edit-profile.html">עריכת פרופיל</a>
-                    <a class="dropdown-item" href="settings.html">הגדרות</a>
-                    <a class="dropdown-item" href="login.html">התנתק</a>
+                  
+						<a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
+						<a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
+					
+						<a class="dropdown-item" href="login.php">התנתק</a>
                 </div>
             </div>
         </div>
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
+                   <ul>
                         <li class="menu-title">
                             ניווט
                         </li>
-                        <li>
-                            <a href="index.php"><i class="fa fa-dashboard"></i> דשבורד</a>
+                        <li >
+                            <a href="index.php"><i class="fas fa-home"></i> דף הבית</a>
                         </li>
                         <li>
                             <a href="feed.php"><i class="fa fa-recycle" aria-hidden="true"></i><b>פיד </b></a>
                         </li>
                         <li>
-                             <a href="myPosts.php"><i class="fa fa-dashboard"></i>
+                             <a href="myPosts.php"><i class="fas fa-comment-dollar"></i>
                              מיחזורים שפרסמתי
                              </a>
                         </li>
                         <li>
-                             <a href="paidRec.php"><i class="fa fa-dashboard"></i>
+                             <a href="paidRec.php"><i class="fas fa-file-invoice-dollar"></i>
                                 מחזורים שקניתי
                              </a>
                         </li>
                         <li class="active">
-                             <a href="profile.php"><i class="fa fa-dashboard"></i>
+                             <a href="profile.php"><i class="fas fa-user"></i>
                             הפרופיל שלי            
+                             </a>
+                        </li>
+                         <li>
+                             <a href="help.php"><i class="fa fa-info"></i>
+                            עזרה            
                              </a>
                         </li>
                     </ul>
@@ -210,7 +236,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                     </div>
 
                     <div class="col-sm-5 col-8 text-right m-b-30">
-                        <a href="edit-profile.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> עריכת פרופיל</a>
+                        <a href="edit-profile.php" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> עריכת פרופיל</a>
                     </div>
                 </div>
                 <div class="card-box">
@@ -227,11 +253,48 @@ $sql="SELECT * FROM users WHERE userName=?";
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
                                                 <h3 class="user-name m-t-0 m-b-0"><?php echo $userName; ?></h3>
-                                                <small class="text-muted">Web Designer</small> <br>
-                                               <div class="staff-id">  <i class="fas fa-baby-carriage"></i>	&nbsp;	&nbsp;	&nbsp; 	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;:level </div>    
-                                                <div class="staff-id">Employee ID : FT-0001</div>
-                                                <div class="staff-msg"><a href="chat.html" class="btn btn-primary">שלח הודעה</a></div>
+                                                
+                                               <div class="staff-id">  	&nbsp;	&nbsp;	&nbsp; 	&nbsp;<span style="font-weigth:bold; font-size:24px;"> 	רמה :</span>&nbsp; <?php
+                                                                          $sum=0;
+                                                             $sql="SELECT * from posts WHERE userName=
+                                                             '".$_SESSION['userName']."' OR paidUser='".$_SESSION['userName']."'";
+                                                                               $result=$conn-> query($sql);
+                                                                               if($result->num_rows>0)
+                                                                               {
+                                                                                  
+                                                                                   while($row=$result->fetch_assoc())
+                                                                                   {
+                                                                                    if($row['paid']==1)
+                                                                                    {
+                                                                                        $sum+=$row['revenue'];
+                                                                                        
+                                                                                    }
+                                                            
+                                                                                   }
+                                                                                   $sum=$sum/2;//TO EDIT 
+                                                                               }
+                                                                             
+                                               
+                                               if($sum<1&&$sum>=0){
+                                                           echo'<i class="fas fa-chess-pawn fa-5x"></i>';
+                                                           echo'<br>   <h3>ממחזר מתחיל<h3>';
+                                               }
+                                                           else if($sum>1&&$sum<=50){
+                                                            echo'<i class="fas fa-chess-knight fa-5x"></i>';
+                                                                 echo'<br> <h3>ממחזר מתקדם<h3>';
+                                                           }
+                                                             else if($sum>50){
+                                                            echo'<i class="fas fa-chess-king fa-5x"></i>';
+                                                                 echo'<br> <h3>ממחזר מתקדם<h3>';
+                                                             }
+                                                            else{ echo $sum ;}
+                                                            
+                                                             
+                                               ?>
+                                             </div> 
+                                                
                                               
+                                            
                                             </div>
                                         </div>
                                         <div class="col-md-7">
@@ -239,334 +302,28 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                 
                                                 <li>
                                                     <span class="title">מספר סלולרי:</span>
-                                                    <span class="text"><a href="">9876543210</a></span>
+                                                    <span class="text"><a href=""><?php echo $tel; ?></a></span>
                                                     
                                                 </li>
                                                 <li>
                                                     <span class="title">כתובת מייל:</span>
                                                     <span class="text"><a href=""><?php echo $email; ?></a></span>
                                                 </li>
-                                                <li>
-                                                    <span class="title">תאריך לידה:</span>
-                                                    <span class="text">24th July</span>
-                                                </li>
-                                                <li>
+                                               
+                                                   <li>
                                                     <span class="title">כתובת מגורים:</span>
-                                                    <span class="text">דיזנגוף 50, תל אביב יפו</span>
+                                                    <span class="text"><a href=""><?php echo $street.$streetnum.' '.$city; ?></a></span>
                                                 </li>
-                                                <li>
-                                                    <span class="title">מין:</span>
-                                                    <span class="text">Male</span>
-                                                </li>
+                                              
                                             </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card-box">
-                            <h3 class="card-title">Skills</h3>
-                            <div class="skills">
-                                <span>IOS</span>
-                                <span>Android</span>
-                                <span>Html</span>
-                                <span>CSS</span>
-                                <span>Codignitor</span>
-                                <span>Php</span>
-                                <span>Javascript</span>
-                                <span>Wordpress</span>
-                                <span>Jquery</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="card-box">
-                            <h3 class="card-title">Education Informations</h3>
-                            <div class="experience-box">
-                                <ul class="experience-list">
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">International College of Arts and Science (UG)</a>
-                                                <div>Bsc Computer Science</div>
-                                                <span class="time">2000 - 2003</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">International College of Arts and Science (PG)</a>
-                                                <div>Msc Computer Science</div>
-                                                <span class="time">2000 - 2003</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-box m-b-0">
-                            <h3 class="card-title">Experience</h3>
-                            <div class="experience-box">
-                                <ul class="experience-list">
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Zen Corporation</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Ron-tech</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Web Designer at Dalt Technology</a>
-                                                <span class="time">Jan 2013 - Present (5 years 2 months)</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="notification-box">
-                <div class="msg-sidebar notifications msg-noti">
-                    <div class="topnav-dropdown-header">
-                        <span>Messages</span>
-                    </div>
-                    <div class="drop-scroll msg-list-scroll">
-                        <ul class="list-box">
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">R</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Richard Miles </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item new-message">
-                                        <div class="list-left">
-                                            <span class="avatar">J</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">John Doe</span>
-                                            <span class="message-time">1 Aug</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">T</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Tarah Shropshire </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">M</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Mike Litorus</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">C</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Catherine Manseau </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">D</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Domenic Houston </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">B</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Buster Wigton </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">R</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Rolland Webber </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">C</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Claire Mapes </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">M</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Melita Faucher</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">J</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Jeffery Lalor</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">L</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Loren Gatlin</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">T</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Tarah Shropshire</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="topnav-dropdown-footer">
-                        <a href="chat.html">See all messages</a>
-                    </div>
-                </div>
-            </div>
+              
+           
         </div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
