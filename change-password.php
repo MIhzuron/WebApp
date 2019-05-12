@@ -93,7 +93,7 @@ if(isset($_POST['newPassSubmit'])) //the user has entered a new pass- lets updat
                 <div class="account-box">
                     <div class="account-wrapper">
                         <div class="account-logo">
-                            <a href="index.html"><img src="assets/img/logo.png" alt="Preadmin"></a>
+                            <a href="index.php">   <img src="assets/img/logo2.jpg" width="60" height="50" alt=""></a>
                         </div>
                         <?php
                         if(isset($_GET['error']))
