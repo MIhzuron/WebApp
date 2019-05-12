@@ -9,7 +9,6 @@ header("Location:login.php");
 }
 
 
-
 $sql="SELECT * FROM users WHERE userName=?";
        $stmt=mysqli_stmt_init($conn);
       if(!mysqli_stmt_prepare($stmt,$sql))
@@ -30,12 +29,16 @@ $sql="SELECT * FROM users WHERE userName=?";
                 $userName= $row['userName'];
                 $email=$row['email'];
                 $path=$row['profilePic'];
-                $city=$row['city'];
             }
           
        }
-       
-       
+  
+  if (isset($_POST['submitSearch']))     
+      {
+         
+          $searchCity=$_POST['searchCity'];
+      }
+     
      function getDateDiff($dateRecive)
       {
      
@@ -76,13 +79,16 @@ $sql="SELECT * FROM users WHERE userName=?";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <title>פיד בקבוקים</title>
+    <title>פיד-בקבוקים</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
@@ -90,20 +96,22 @@ $sql="SELECT * FROM users WHERE userName=?";
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 	   $(document).ready(function(){
-	       var feedCount=10;
+	       var searchCity="<?php echo $searchCity; ?>";
+	       var feedCount=1;
   $("#reload").click(function(){
-      feedCount= feedCount+10;
-    $("#feed").load("loadFeedCity.php", {
-        newFeedCount :feedCount
+      feedCount= feedCount+1;
+    $("#feed").load("loadFeedSearch.php", {
+        newFeedCount :feedCount,
+        newSearchCity : searchCity
     });
   });
 });
 	</script>
-	
+
 </head>
 
 <body>
-    <datalist id="dlCities">
+     <datalist id="dlCities">
 <option value="אבו ג'ווייעד )שבט)" /><option value="אבו גוש" /><option value="אבו סנאן" /><option value="אבו סריחאן )שבט)" /><option value="אבו עבדון )שבט)" /><option value="אבו עמאר )שבט)"/><option value="אבו עמרה )שבט)" /><option value="אבו קורינאת )שבט)" /><option value="אבו קרינאת )יישוב)" /><option value="אבו רובייעה )שבט)" /><option value="אבו רוקייק )שבט)" /><option value="אבו תלול" /><option value="אבטין" /><option value="אבטליון" /><option value="אביאל" /><option value="אביבים" /><option value="אביגדור" /><option value="אביחיל" /><option value="אביטל" /><option value="אביעזר" /><option value="אבירים" /><option value="אבן יהודה" /><option value="אבן מנחם" /><option value="אבן ספיר" /><option value="אבן שמואל" /><option value="אבני איתן" /><option value="אבני חפץ" /><option value="אבנת" /><option value="אבשלום" /><option value="אדורה" /><option value="אדירים" /><option value="אדמית" /><option value="אדרת" /><option value="אודים" /><option value="אודם" /><option value="אוהד" /><option value="אום אל-פחם" /><option value="אום אל-קוטוף" /><option value="אום בטין"<option value="אומן" /><option value="אומץ" /><option value="אופקים" /><option value="אור הגנוז" /><option value="אור הנר" /><option value="אור יהודה" /><option value="אור עקיבא" /><option value="אורה" /><option value="אורות" /><option value="אורטל" /><option value="אורים" /><option value="אורנים" /><option value="אורנית" /><option value="אושה" /><option value="אזור" /><option value="אחווה" /><option value="אחוזם" /><option value="אחוזת ברק" /><option value="אחיהוד" /><option value="אחיטוב" /><option value="אחיסמך" /><option value="אחיעזר" /><option value="אטרש )שבט(" /><option value="איבים" /><option value="אייל" /><option value="איילת השחר" /><option value="אילון" /><option value="אילות" /><option value="אילניה" /><option value="אילת" /><option value="אירוס" /><option value="איתמר" /><option value="איתן" /><option value="איתנים" /><option value="אכסאל" /><option value="אל סייד" /><option value="אל-עזי" /><option value="אל-עריאן" /><option value="אל-רום" /><option value="אלומה" /><option value="אלומות" /><option value="אלון הגליל" /><option value="אלון מורה" /><option value="אלון שבות" /><option value="אלוני אבא" /><option value="אלוני הבשן" /><option value="אלוני יצחק" /><option value="אלונים" /><option value="אלי-עד" /><option value="אליאב" /><option value="אליכין" /><option value="אליפז" /><option value="אליפלט" /><option value="אליקים" /><option value="אלישיב" /><option value="אלישמע" /><option value="אלמגור" /><option value="אלמוג" /><option value="אלעד" /><option value="אלעזר" /><option value="אלפי מנשה" /><option value="אלקוש" /><option value="אלקנה" /><option value="אמונים" /><option value="אמירים" /><option value="אמנון" /><option value="אמציה" /><option value="אניעם" /><option value="אסד )שבט)" /><option value="אספר" /><option value="אעבלין" /><option value="אעצם )שבט)" /><option value="אפיניש )שבט)" /><option value="אפיק" /><option value="אפיקים" /><option value="אפק" />
 <option value="אפרת" /><option value="ארבל" /><option value="ארגמן" /><option value="ארז" /><option value="אריאל" /><option value="ארסוף" /><option value="אשבול" /><option value="אשבל" /><option value="אשדוד" /><option value="אשדות יעקב  )איחוד)" /><option value="אשדות יעקב  )מאוחד)" /><option value="אשחר" /><option value="אשכולות" /><option value="אשל הנשיא" /><option value="אשלים" /><option value="אשקלון" /><option value="אשרת" /><option value="אשתאול" /><option value="אתגר" /><option value="באקה אל-גרביה" /><option value="באר אורה" /><option value="באר גנים" /><option value="באר טוביה" /><option value="באר יעקב" /><option value="באר מילכה" /><option value="באר שבע" /><option value="בארות יצחק" /><option value="בארותיים" /><option value="בארי" /><option value="בוסתן הגליל" /><option value="בועיינה-נוג'ידאת" /><option value="בוקעאתא" /><option value="בורגתה" /><option value="בחן" /><option value="בטחה" /><option value="ביצרון" /><option value="ביר אל-מכסור" /><option value="ביר הדאג'" /><option value="ביריה" /><option value="בית אורן" /><option value="בית אל" /><option value="בית אלעזרי" /><option value="בית אלפא" /><option value="בית אריה" /><option value="בית ברל" /><option value="בית ג'ן" /><option value="בית גוברין" /><option value="בית גמליאל" /><option value="בית דגן" /><option value="בית הגדי" /><option value="בית הלוי" /><option value="בית הלל" /><option value="בית העמק" /><option value="בית הערבה" /><option value="בית השיטה" /><option value="בית זיד" /><option value="בית זית" /><option value="בית זרע" /><option value="בית חורון" /><option value="בית חירות" /><option value="בית חלקיה" /><option value="בית חנן" /><option value="בית חנניה" /><option value="בית חשמונאי" /><option value="בית יהושע" /><option value="בית יוסף" /><option value="בית ינאי" /><option value="בית יצחק-שער חפר" /><option value="בית לחם הגלילית" /><option value="בית מאיר" /><option value="בית נחמיה" /><option value="בית ניר" /><option value="בית נקופה" /><option value="בית עובד" /><option value="בית עוזיאל" /><option value="בית עזרא" /><option value="בית עריף" /><option value="בית צבי" /><option value="בית קמה" /><option value="בית קשת" /><option value="בית רבן" /><option value="בית רימון" /><option value="בית שאן" /><option value="בית שמש" /><option value="בית שערים" /><option value="בית שקמה" /><option value="ביתן אהרן" /><option value="ביתר עילית" /><option value="בלפוריה" /><option value="בן זכאי" /><option value="בן עמי" /><option value="בן שמן )כפר נוער)" /><option value="בן שמן )מושב)" /><option value="בני ברק" /><option value="בני דקלים" /><option value="בני דרום" /><option value="בני דרור" /><option value="בני יהודה" /><option value="בני נצרים" /><option value="בני עטרות" /><option value='בני עי"ש' /><option value="בני ציון" /><option value="בני ראם" /><option value="בניה" /><option value="בנימינה-גבעת עדה" /><option value='בסמ"ה' /><option value="בסמת טבעון" /><option value="בענה" /><option value="בצרה" /><option value="בצת" /><option value="בקוע" /><option value="בקעות" /><option value="בר גיורא" /><option value="בר יוחאי" /><option value="ברוכין" /><option value="ברור חיל" /><option value="ברוש" /><option value="ברכה" /><option value="ברכיה" /><option value="ברעם" /><option value="ברק" /><option value="ברקאי" /><option value="ברקן" /><option value="ברקת" /><option value="בת הדר" /><option value="בת חן" /><option value="בת חפר" /><option value="בת חצור" /><option value="בת ים" /><option value="בת עין" /><option value="בת שלמה" /><option value="ג'דיידה-מכר" /><option value="ג'ולס" /><option value="ג'לג'וליה" /><option value="ג'נאביב )שבט)" /><option value="ג'סר א-זרקא" /><option value="ג'ש )גוש חלב)" /><option value="ג'ת" /><option value="גאולי תימן" /><option value="גאולים" />
 <option value="גאליה" /><option value="גבולות" /><option value="גבים" /><option value="גבע" /><option value="גבע בנימין" /><option value="גבע כרמל" /><option value="גבעולים" /><option value="גבעון החדשה" /><option value="גבעות בר" /><option value="גבעת אבני" /><option value="גבעת אלה" /><option value="גבעת ברנר" /><option value="גבעת השלושה" /><option value="גבעת זאב" /><option value='גבעת ח"ן' /><option value="גבעת חיים )איחוד)" /><option value="גבעת חיים )מאוחד)" /><option value="גבעת יואב" /><option value="גבעת יערים" /><option value="גבעת ישעיהו" /><option value='גבעת כ"ח' /><option value='גבעת ניל"י' /><option value="גבעת עוז " /><option value="גבעת שמואל" /><option value="גבעת שמש" /><option value="גבעת שפירא" /><option value="גבעתי" /><option value="גבעתיים" /><option value="גברעם" /><option value="גבת" /><option value="גדות" /><option value="גדיש" /><option value="גדעונה" /><option value="גדרה" /><option value="גונן" /><option value="גורן" /><option value="גורנות הגליל" /><option value="גזית" /><option value="גזר" /><option value="גיאה" /><option value="גיבתון" /><option value="גיזו" /><option value="גילון" /><option value="גילת" /><option value="גינוסר" /><option value="גיניגר" /><option value="גינתון" /><option value="גיתה" /><option value="גיתית" /><option value="גלאון" /><option value="גלגל" /><option value="גליל ים" /><option value="גלעד )אבן יצחק)" /><option value="גמזו" /><option value="גן הדרום" /><option value="גן השומרון" /><option value="גן חיים" /><option value="גן יאשיה" /><option value="גן יבנה" /><option value="גן נר" /><option value="גן שורק" /><option value="גן שלמה" /><option value="גן שמואל" /><option value="גנות" /><option value="גנות הדר" /><option value="גני הדר" /><option value="גני טל" /><option value="גני יוחנן" /><option value="גני מודיעין" /><option value="גני עם" /><option value="גני תקווה" /><option value="געש" /><option value="געתון" /><option value="גפן" /><option value="גרופית" /><option value="גשור" /><option value="גשר" /><option value="גשר הזיו" /><option value="גת )קיבוץ)" /><option value="גת רימון" /><option value="דאלית אל-כרמל" /><option value="דבורה" /><option value="דבוריה" /><option value="דבירה" /><option value="דברת" /><option value="דגניה א'" /><option value="דגניה ב'" /><option value='דוב"ב' /><option value="דולב" /><option value="דור" /><option value="דורות" /><option value="דחי" /><option value="דייר אל-אסד" /><option value="דייר חנא" /><option value="דייר ראפאת" /><option value="דימונה" /><option value="דישון" /><option value="דליה" /><option value="דלתון" /><option value="דמיידה" /><option value="דן" /><option value="דפנה" /><option value="דקל" /><option value="דריג'את" /><option value="האון" /><option value="הבונים" /><option value="הגושרים" /><option value="הדר עם" /><option value="הוד השרון" /><option value="הודיה" /><option value="הודיות" /><option value="הוואשלה )שבט)" /><option value="הוזייל )שבט)" /><option value="הושעיה" /><option value="הזורע" /><option value="הזורעים" /><option value="החותרים" /><option value="היוגב" /><option value="הילה" /><option value="המעפיל" /><option value="הסוללים" /><option value="העוגן" /><option value="הר אדר" /><option value="הר גילה" /><option value="הר עמשא" /><option value="הראל" /><option value="הרדוף" /><option value="הרצליה" /><option value="הררית" /><option value="ורד יריחו" /><option value="ורדון" /><option value="זבארגה )שבט)" /><option value="זבדיאל" /><option value="זוהר" /><option value="זיקים" /><option value="זיתן" /><option value="זכרון יעקב" /><option value="זכריה" /><option value="זמר" /><option value="זמרת" /><option value="זנוח" /><option value="זרועה" /><option value="זרזיר" /><option value="זרחיה" /><option value="ח'ואלד" /><option value="ח'ואלד )שבט)" /><option value="חבצלת השרון" /><option value="חבר" /><option value="חברון" /><option value="חגור" /><option value="חגי" /><option value="חגלה" /><option value="חד-נס" /><option value="חדיד" /><option value="חדרה" /><option value="חוג'ייראת )ד'הרה)" /><option value="חולדה" /><option value="חולון" /><option value="חולית" /><option value="חולתה" /><option value="חוסן" /><option value="חוסנייה" /><option value="חופית" /><option value="חוקוק" /><option value="חורה" /><option value="חורפיש" /><option value="חורשים" /><option value="חזון" /><option value="חיבת ציון" /><option value="חיננית" /><option value="חיפה" /><option value="חירות" /><option value="חלוץ" /><option value="חלמיש" /><option value="חלץ" /><option value="חמאם" /><option value="חמד" /><option value="חמדיה" /><option value="חמדת" /><option value="חמרה" /><option value="חניאל" /><option value="חניתה" /><option value="חנתון" /><option value="חספין" /><option value="חפץ חיים" /><option value="חפצי-בה" /><option value="חצב" /><option value="חצבה" /><option value="חצור הגלילית" /><option value="חצור-אשדוד" /><option value="חצר בארותיים" /><option value="חצרות חולדה" /><option value="חצרות יסף" /><option value='חצרות כ"ח' /><option value="חצרים" /><option value="חרב לאת" /><option value="חרוצים" /><option value="חריש" /><option value="חרמש" /><option value="חרשים" /><option value="חשמונאים" /><option value="טבריה" /><option value="טובא-זנגריה" /><option value="טורעאן" /><option value="טייבה" />
@@ -200,12 +208,11 @@ $sql="SELECT * FROM users WHERE userName=?";
                         </div>
                     </div>
                 </li>
-                
-                  <li class="nav-item dropdown has-arrow">
+               
+                <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img">
-							<img class="rounded-circle" src=
-							        <?php
+                        <span class="user-img"><img class="rounded-circle" src=
+						        <?php
                                     if($path !=NULL)
                                     {
                                         echo "$path";
@@ -217,27 +224,27 @@ $sql="SELECT * FROM users WHERE userName=?";
                                     ?>
                         width="40" alt="Admin">
 							<span class="status online"></span></span>
-						</span>
-						<span><?php
-          echo $userName;
-          ?></span>
+                        <span>
+                            <?php
+                            echo $userName;
+                            
+                            ?>
+                        </span>
                     </a>
 					<div class="dropdown-menu">
-					    
 						<a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
 						<a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
-						
+						<a class="dropdown-item" href="settings.php">הגדרות</a>
 						<a class="dropdown-item" href="login.php">התנתק</a>
-						
 					</div>
                 </li>
             </ul>
             <div class="dropdown mobile-user-menu pull-right">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
+                     <a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
                     <a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
-                  
+                    <a class="dropdown-item" href="settings.php">הגדרות</a>
                     <a class="dropdown-item" href="login.php">התנתק</a>
                 </div>
             </div>
@@ -245,34 +252,24 @@ $sql="SELECT * FROM users WHERE userName=?";
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
-                         <ul>
-                        <li class="menu-title">
+                    <ul>
+                       <li class="menu-title">
                             ניווט
                         </li>
-                        <li >
-                            <a href="index.php"><i class="fas fa-home"></i> דף הבית</a>
+                        <li>
+                            <a href="index.php"><i class="fa fa-dashboard"></i> דשבורד</a>
                         </li>
                         <li class="active">
                             <a href="feed.php"><i class="fa fa-recycle" aria-hidden="true"></i><b>פיד </b></a>
                         </li>
                         <li>
-                             <a href="myPosts.php"><i class="fas fa-comment-dollar"></i>
+                             <a href="myPosts.php"><i class="fa fa-dashboard"></i>
                              מיחזורים שפרסמתי
                              </a>
                         </li>
                         <li>
-                             <a href="paidRec.php"><i class="fas fa-file-invoice-dollar"></i>
+                             <a href="paidRec.php"><i class="fa fa-dashboard"></i>
                                 מחזורים שקניתי
-                             </a>
-                        </li>
-                        <li>
-                             <a href="profile.php"><i class="fas fa-user"></i>
-                            הפרופיל שלי            
-                             </a>
-                        </li>
-                         <li >
-                             <a href="help.php"><i class="fa fa-info"></i>
-                            עזרה            
                              </a>
                         </li>
                     </ul>
@@ -288,9 +285,10 @@ $sql="SELECT * FROM users WHERE userName=?";
                                 <div class="row">
                                     <div class="col-4">
                                         <h4 class="page-title m-b-0 m-t-5">פיד בקבוקים</h4>
+                                     
                                     </div>
                                     <div class="col-8">
-                                        <form method="post" action="feedSearch.php">
+                                      <form method="post" action="feedSearch.php">
                                         <div class="navbar justify-content-end">
                                             <div class="search-box m-t-0">
                                                 <div class="input-group input-group-sm">
@@ -321,19 +319,19 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                 <a href="add-post.php" class="btn btn-primary btn-block"> צור פוסט <i class="fa fa-plus"></i></a>
                                                 <div class="roles-menu">
                                                     <ul>
-                                                        <li ><a href="feed.php">הכל</a></li>
-                                                        <li class="active"><a href="feedCity.php">בעיר שלי</a></li>
+                                                        <li><a href="feed.php">הכל</a></li>
+                                                        <li><a href="feedCity.php">בעיר שלי</a></li>
                                                         <li><a href="feedRev.php">שווי</a></li>
-                                                        
+                                                       
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="contacts-list col-sm-8 col-lg-9">
                                                 <ul class="contact-list" id="feed">
                                                         <?php
-                                                        
-                                                        $sql="SELECT * from posts WHERE city='$city' AND paid=0 AND isDeleted='0'  ORDER BY id DESC LIMIT 10";
-                                                             $result=$conn-> query($sql);
+                                                         
+                                                        $sql="SELECT * from posts WHERE paid=0 AND isDeleted='0' AND city='".$searchCity."' ORDER BY id DESC LIMIT 2";
+                                                       $result=$conn-> query($sql);
                                                        if($result->num_rows>0)
                                                        {
                                                            $i=1;
@@ -341,7 +339,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                            {
                                                                echo '
                                                               <li>
-
+                                                                
                                                                 <div class="contact-cont">
                                                             <div class="pull-left user-img m-r-10">
                                                                 <a href="profile.html" title="John Doe"><img src=
@@ -384,7 +382,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                   ';
                                                                    if($row['userName']!=$userName)
                                                                         {
-                                                                         echo '
+                                                                            echo '
                                                                      <span class="contact-date">
 
                                                                            <form method="post" action="post.php">
@@ -405,7 +403,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                 <li class="dropdown dropdown-action">
                                                                     <a href="" class="dropdown-toggle action-icon" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                                         <a class="dropdown-item" href="myPosts.php">ערוך\מחק</a>
+                                                                        <a class="dropdown-item" href="myPosts.php">ערוך\מחק</a>
                                                                         
                                                                         
                                                                     </div>
@@ -451,11 +449,12 @@ $sql="SELECT * FROM users WHERE userName=?";
         </div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
-    <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+     <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="assets/js/popper.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.slimscroll.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
+ 
 </body>
 
 </html>

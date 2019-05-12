@@ -71,8 +71,9 @@ $sql="SELECT * FROM users WHERE userName=?";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <title>Preadmin - Bootstrap Admin Template</title>
+    <title>דף הבית</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -83,13 +84,16 @@ $sql="SELECT * FROM users WHERE userName=?";
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="assets/plugins/morris/morris.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
 	
 	
-	<script>
+	<script> 
+	/* ITAY-10.5- not sure this is needed
 window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
@@ -125,6 +129,9 @@ var chart = new CanvasJS.Chart("chartContainer", {
 chart.render();
 
 }
+*/
+
+
 </script>
 </head>
 
@@ -133,22 +140,22 @@ chart.render();
         <div class="header">
             <div class="header-left">
                 <a href="index.php" class="logo">
-                    <img src="assets/img/logo.png" width="40" height="40" alt="">
+                    <img src="assets/img/logo2.jpg" width="60" height="50" alt="">
                 </a>
             </div>
             <div class="page-title-box pull-left">
-                <h3>מיחזורון</h3>
+                <h3 >מיחזורון</h3>
             </div>
             <a id="mobile_btn" class="mobile_btn pull-left" href="#sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <ul class="nav user-menu pull-right">
                 <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right">3</span></a>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right" id="numOfNotifications"></span></a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span>Notifications</span>
                         </div>
                         <div class="drop-scroll">
-                            <ul class="notification-list">
+                            <ul class="notification-list" id="notificationList">
                                 <li class="notification-message">
                                     <a href="activities.html">
                                         <div class="media">
@@ -236,10 +243,12 @@ chart.render();
           ?></span>
                     </a>
 					<div class="dropdown-menu">
+					    
 						<a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
 						<a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
-						<a class="dropdown-item" href="settings.php">הגדרות</a>
+					
 						<a class="dropdown-item" href="login.php">התנתק</a>
+						
 					</div>
                 </li>
             </ul>
@@ -248,7 +257,7 @@ chart.render();
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
                     <a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
-                    <a class="dropdown-item" href="settings.php">הגדרות</a>
+                 
                     <a class="dropdown-item" href="login.php">התנתק</a>
                 </div>
             </div>
@@ -261,24 +270,29 @@ chart.render();
                             ניווט
                         </li>
                         <li class="active">
-                            <a href="index.php"><i class="fa fa-dashboard"></i> דשבורד</a>
+                            <a href="index.php"><i class="fas fa-home"></i> דף הבית</a>
                         </li>
                         <li>
                             <a href="feed.php"><i class="fa fa-recycle" aria-hidden="true"></i><b>פיד </b></a>
                         </li>
                         <li>
-                             <a href="myPosts.php"><i class="fa fa-dashboard"></i>
+                             <a href="myPosts.php"><i class="fas fa-comment-dollar"></i>
                              מיחזורים שפרסמתי
                              </a>
                         </li>
                         <li>
-                             <a href="paidRec.php"><i class="fa fa-dashboard"></i>
+                             <a href="paidRec.php"><i class="fas fa-file-invoice-dollar"></i>
                                 מחזורים שקניתי
                              </a>
                         </li>
                         <li>
-                             <a href="profile.php"><i class="fa fa-dashboard"></i>
+                             <a href="profile.php"><i class="fas fa-user"></i>
                             הפרופיל שלי            
+                             </a>
+                        </li>
+                         <li>
+                             <a href="help.php"><i class="fa fa-info"></i>
+                            עזרה            
                              </a>
                         </li>
                     </ul>
@@ -317,7 +331,7 @@ chart.render();
                                     ?>
                                     
                                 </h4>
-                                <span>רווחים</span>
+                                <span> <br>רווח משוער </span>
                             </div>
                         </div>
                     </div>
@@ -477,11 +491,48 @@ chart.render();
                     <div class="col-md-6">
                           <div class="card activity-panel">
                             <div class="card-body">
-                                <h4 class="card-title">מיחזורים אחרונים</h4>
+                                <h4 class="card-title">הרמה שלך :</h4>
                                
-                                    <ul class="activity-list">
-                        <div id="chartContainer" style="height: 370px;"></div>
-                        </ul>
+                                  
+                                        
+                                           <div class="staff-id">  <?php
+                                                        
+                                               
+                                               if($sum<1&&$sum>=0){
+                                                           echo'<i class="fas fa-chess-pawn fa-10x"></i>';
+                                                           echo'<br> <h3>ממחזר מתחיל<h3>';
+                                               }
+                                                           else if($sum>1&&$sum<=50){
+                                                            echo'<i class="fas fa-chess-knight fa-10x"></i>';
+                                                                 echo'<br> <h3>ממחזר מתקדם<h3>';
+                                                           }
+                                                             else if($sum>50){
+                                                            echo'<i class="fas fa-chess-king fa-10x"></i>';
+                                                                 echo'<br> <h3>ממחזר מתקדם<h3>';
+                                                             }
+                                                            else{ echo $sum ;}
+                                                             
+                                               ?>
+                                                  </div> 
+                                                
+                       <!-- גודל  -->       
+                     <div id="chartContainer" style="height: 370px;">
+                         <hr>
+                         <br><br><br><br>
+                         <h3> עזרה</h3>
+                         <a href="help.php"><i class="fa fa-info fa-5x"></i>
+                           <br> לחץ כאן לעזרה             
+                             </a>
+                             
+                             
+                         
+                         
+                     </div>
+                        
+                    
+                        
+                        
+                     
                         
                         </div>
                         </div>
@@ -507,6 +558,44 @@ chart.render();
     <script type="text/javascript" src="assets/plugins/raphael/raphael-min.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        var userName='<?php echo $_SESSION['userName']; ?>';
+
+         $(document).ready(function(){
+
+
+
+        setInterval(function()
+{ 
+
+   $("#numOfNotifications").load("http://eavni93.com/itay/notifications.php", {
+        action:"countNotifications",
+       userName:userName
+       
+        
+    });
+    
+      $("#notificationList").load("http://eavni93.com/itay/notifications.php", {
+                userName:userName,
+               action:"showNotifications"
+
+
+
+        
+    });
+
+
+
+},2000);
+
+
+
+
+
+});
+        
+        
+    </script>
 </body>
 
 </html>
