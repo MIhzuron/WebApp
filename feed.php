@@ -76,6 +76,7 @@ $sql="SELECT * FROM users WHERE userName=?";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     <title>פיד-בקבוקים</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
@@ -123,7 +124,7 @@ $sql="SELECT * FROM users WHERE userName=?";
         <div class="header">
             <div class="header-left">
                 <a href="index.php" class="logo">
-                    <img src="assets/img/logo.png" width="40" height="40" alt="">
+                     <img src="assets/img/logo2.jpg" width="60" height="50" alt="">
                 </a>
             </div>
             <div class="page-title-box pull-left">
@@ -229,7 +230,7 @@ $sql="SELECT * FROM users WHERE userName=?";
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
 						<a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
-						<a class="dropdown-item" href="settings.php">הגדרות</a>
+						
 						<a class="dropdown-item" href="login.php">התנתק</a>
 					</div>
                 </li>
@@ -239,7 +240,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                 <div class="dropdown-menu dropdown-menu-right">
                      <a class="dropdown-item" href="profile.php">הפרופיל שלי</a>
                     <a class="dropdown-item" href="edit-profile.php">ערוך פרופיל</a>
-                    <a class="dropdown-item" href="settings.php">הגדרות</a>
+                  
                     <a class="dropdown-item" href="login.php">התנתק</a>
                 </div>
             </div>
@@ -248,28 +249,33 @@ $sql="SELECT * FROM users WHERE userName=?";
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                   <li class="menu-title">
+                        <li class="menu-title">
                             ניווט
                         </li>
-                        <li>
-                            <a href="index.php"><i class="fa fa-dashboard"></i> דשבורד</a>
+                        <li >
+                            <a href="index.php"><i class="fas fa-home"></i> דף הבית</a>
                         </li>
                         <li class="active">
                             <a href="feed.php"><i class="fa fa-recycle" aria-hidden="true"></i><b>פיד </b></a>
                         </li>
                         <li>
-                             <a href="myPosts.php"><i class="fa fa-dashboard"></i>
+                             <a href="myPosts.php"><i class="fas fa-comment-dollar"></i>
                              מיחזורים שפרסמתי
                              </a>
                         </li>
                         <li>
-                             <a href="paidRec.php"><i class="fa fa-dashboard"></i>
+                             <a href="paidRec.php"><i class="fas fa-file-invoice-dollar"></i>
                                 מחזורים שקניתי
                              </a>
                         </li>
-                         <li>
-                             <a href="profile.php"><i class="fa fa-dashboard"></i>
+                        <li>
+                             <a href="profile.php"><i class="fas fa-user"></i>
                             הפרופיל שלי            
+                             </a>
+                        </li>
+                         <li>
+                             <a href="help.php"><i class="fa fa-info"></i>
+                            עזרה            
                              </a>
                         </li>
                     </ul>
@@ -406,8 +412,8 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                 <li class="dropdown dropdown-action">
                                                                     <a href="" class="dropdown-toggle action-icon" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                                        <a class="dropdown-item" href="javascript:void(0)">Edit</a>
-                                                                        <a class="dropdown-item" href="javascript:void(0)">Delete</a>
+                                                                        <a class="dropdown-item" href="myPosts.php">ערוך\מחק</a>
+                                                                       
                                                                         
                                                                         
                                                                     </div>
