@@ -61,7 +61,7 @@ $sql="SELECT * FROM users WHERE userName=?";
 
     //echo ((strtotime(date("Y-m-d")))-strtotime((date("Y-m-d", time() - 60 * 60 * 24))))/(60*60*24);
    
-           
+  //         
        
 }
 ?>
