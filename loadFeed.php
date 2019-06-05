@@ -24,7 +24,7 @@ $userName=$_SESSION['userName'];
 
                                                                 <div class="contact-cont">
                                                             <div class="pull-left user-img m-r-10">
-                                                                <a href="profile.html" title="John Doe"><img src=
+                                                                <a href="" title=""><img src=
                                                                 '.$row['profilePic'].'
                                                                 alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                                             </div>
@@ -85,8 +85,7 @@ $userName=$_SESSION['userName'];
                                                                 <li class="dropdown dropdown-action">
                                                                     <a href="" class="dropdown-toggle action-icon" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                                        <a class="dropdown-item" href="javascript:void(0)">Edit</a>
-                                                                        <a class="dropdown-item" href="javascript:void(0)">Delete</a>
+                                                                        <a class="dropdown-item" href="myPosts.php">ערוך\מחק</a>
                                                                         
                                                                         
                                                                     </div>
