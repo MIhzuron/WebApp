@@ -80,7 +80,7 @@ $sql="SELECT * FROM users WHERE userName=?";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo2.jpg">
     <title>מיחזורים שקניתי</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -91,7 +91,30 @@ $sql="SELECT * FROM users WHERE userName=?";
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
-
+ <style>
+     #navButton
+     {
+         padding: 10px 10px 10px 36px;
+    font-family: "Trebuchet MS", Arial, Verdana;   
+    background: #e9e9e9 url(http://eavni93.com/app/uploads/Wazeicon.png) 1px 1px no-repeat;
+    border-radius: 16px;
+    border: 1px solid #d9d9d9;
+    text-shadow: 1px 1px #fff;
+	
+	
+     }
+     #callButton
+     {
+         padding: 10px 10px 10px 36px;
+    font-family: "Trebuchet MS", Arial, Verdana;   
+    background: #e9e9e9 url(http://eavni93.com/app/uploads/phone.png) 7px 7px no-repeat;
+    border-radius: 16px;
+    border: 1px solid #d9d9d9;
+    text-shadow: 1px 1px #fff;
+    color:black;
+     }
+     
+ </style>
 	
 </head>
 
@@ -104,79 +127,27 @@ $sql="SELECT * FROM users WHERE userName=?";
                 </a>
             </div>
             <div class="page-title-box pull-left">
-                <h3>מיחזורון</h3>
+                 <span id="updateNumOfNotifications"></span>
+                <h3 >מיחזורון</h3>
             </div>
             <a id="mobile_btn" class="mobile_btn pull-left" href="#sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <ul class="nav user-menu pull-right">
                 <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right">3</span></a>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="notificationButton"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right" id="numOfNotifications"></span></a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
+                            <span>התראות</span>
                         </div>
                         <div class="drop-scroll">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
+                            <ul class="notification-list" id="notificationList">
+                                
+                              
+                
+                               
                             </ul>
                         </div>
                         <div class="topnav-dropdown-footer">
-                            <a href="activities.html">View all Notifications</a>
+                            <a href="notificationList.php">הצג הכל</a>
                         </div>
                     </div>
                 </li>
@@ -256,6 +227,11 @@ $sql="SELECT * FROM users WHERE userName=?";
                             עזרה            
                              </a>
                         </li>
+                          <li>
+                             <a href="faq.php"> <i class="far fa-question-circle"></i>
+                           שאלות ותשובות           
+                             </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -294,9 +270,10 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                        $result=$conn-> query($sql);
                                                        if($result->num_rows>0)
                                                        {
-                                                           $i=1;
+                                                           $i=0;
                                                              while($row=$result->fetch_assoc())
                                                            {
+                                                              
                                                                echo '
                                                               <tr>
                                                               <td>'.$row['id'].'
@@ -305,7 +282,7 @@ $sql="SELECT * FROM users WHERE userName=?";
 
                                                                 <div class="contact-cont">
                                                             <div class="pull-left user-img m-r-10">
-                                                                <a href="profile.html" title="John Doe"><img src=
+                                                                <a href="" title=""><img src=
                                                                 '.$row['profilePic'].'
                                                                 alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                                             </div>
@@ -363,6 +340,8 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                    <strong>
                                                                    '.$row['tel'].'
                                                                    </strong></span>';
+                                                                   $fullAdress= $row['street'].' '. $row['houseNumber'].' '.$row['city'];
+                                                                   echo $fullAddress;
                                                                   ?>
                                                               <?php
                                                                         $useragent=$_SERVER['HTTP_USER_AGENT'];
@@ -370,10 +349,46 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                 
                                                                         { 
                                                                          
-                                                                            $phone = $row['tel'];
-                                                                            echo '<a href=tel:'.$phone.'>
+                                                                                                           $phone = $row['tel'];
+                                                                            echo '
+                                                                            <br>
+                                                                            <br>
+                                                                            <span class="contact-date">
+                                                                            <a href=tel:'.$phone.' id="callButton">
                                                                             לחץ לחיוג
-                                                                            </a>';
+                                                                            </a>'.'
+                                                                            </span><br><br>
+
+                                                                            <input type="hidden" value="'.$fullAdress.'" id='.$i.'>';
+                                                                             echo '
+                                                                               <span class="contact-date">
+                                                                            <button type="submit" id="navButton" value="click to nav" onclick="encode('.$i.')">נווט</button></span<br>';
+                                                                            $i++;
+                                                                             echo'
+   <script>
+                     
+                                                           
+                         function nav(str)
+                            {
+                            var base="https://waze.com/ul?q=";
+                            var search=base+str;
+                            
+                            window.open(search,"_self");
+                                }
+                                function encode(i)
+                                {
+                             var str=document.getElementById(i).value;
+                             
+                                
+                                 var newStr=encodeURI(str);
+  
+                                 nav(newStr);
+                                  }
+                    
+            
+                    </script>
+  ';
+                                                                            
                                                                             
                                                                         }
                                                                         else{
@@ -384,7 +399,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                    
                                                             
                                                                     echo'
-                                                                   </script>
+                                                                   </script><br><br>
                                                                     <span class="contact-date">
                                                                    קוד בן 4 ספרות:
                                                                    </span>
@@ -429,7 +444,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                                         
                                         
                                        
-                                        
+                                         
                                     </tbody>
                                 </table>
                             </div>
@@ -448,6 +463,54 @@ $sql="SELECT * FROM users WHERE userName=?";
     <script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.slimscroll.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
+  <script>
+        var userName='<?php echo $_SESSION['userName']; ?>';
+
+         $(document).ready(function(){
+
+
+
+        setInterval(function()
+{ 
+
+   $("#numOfNotifications").load("http://eavni93.com/itay/notifications.php", {
+        action:"countNotifications",
+       userName:userName
+       
+        
+    });
+    
+      $("#notificationList").load("http://eavni93.com/itay/notifications.php", {
+                userName:userName,
+               action:"showNotifications"
+
+
+
+        
+    });
+
+
+
+},2000);
+
+//clear notifications after user clicked
+
+$("#notificationButton").click(function(){
+    
+    
+ $("#updateNumOfNotifications").load("http://eavni93.com/itay/notifications.php", {
+                userName:userName,
+               action:"clearNotifications"
+    
+});
+
+
+
+});
+         });
+    
+        
+    </script>
 </body>
 
 </html>

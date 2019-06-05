@@ -164,15 +164,15 @@ $sum=0;
            $sum=$sum/2;//TO EDIT 
              }
 if($sum<1&&$sum>=0){
-  echo'<i class="fas fa-chess-pawn fa-10x"></i>';
+  echo'<i class="fas fa-chess-pawn fa-3x"></i>';
     echo'<br> <h3>ממחזר מתחיל<h3>';
    }
     else if($sum>1&&$sum<=50){
-     echo'<i class="fas fa-chess-knight fa-10x"></i>';
+     echo'<i class="fas fa-chess-knight fa-3x"></i>';
      echo'<br> <h3>ממחזר מתקדם<h3>';
        }
         else if($sum>50){
-       echo'<i class="fas fa-chess-king fa-10x"></i>';
+       echo'<i class="fas fa-chess-king fa-3x"></i>';
         echo'<br> <h3>ממחזר מתקדם<h3>';
          }
         else{ echo $sum ;}    

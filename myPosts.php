@@ -30,6 +30,7 @@ $sql="SELECT * FROM users WHERE userName=?";
                 $userName= $row['userName'];
                 $email=$row['email'];
                 $path=$row['profilePic'];
+                $amountBot=$row['amountBot'];
             }
           
        }
@@ -38,6 +39,27 @@ $sql="SELECT * FROM users WHERE userName=?";
        {
            if($_GET['delete']=='true' && $_GET['id']!= NULL)
            {
+               $sql="SELECT * FROM posts WHERE userName='".$_SESSION['userName']."' AND id='".$_GET['id']."'";
+        $result = mysqli_query($conn, $sql);
+        
+        if (mysqli_num_rows($result) == 0) {
+            header("Location: index.php");
+            exit();
+        }
+        else 
+        {
+            $row = mysqli_fetch_assoc($result);
+            $amountA=$row['amountA'];
+            $amountB=$row['amountB'];
+            $sum=$amountA+$amountB;
+        }
+        $amountBot=$amountBot-$sum;
+        $sql="UPDATE users SET amountBot='".$amountBot."' WHERE userName='".$_SESSION['userName']."'";
+        if ($conn->query($sql) == TRUE) {
+                
+                 } else {
+                
+                    }
                $sql="UPDATE posts SET isDeleted=1 WHERE id='".$_GET['id']."'";
                if ($conn->query($sql) == TRUE) {
                 header("Location: myPosts.php");
@@ -72,6 +94,15 @@ $sql="SELECT * FROM users WHERE userName=?";
            return $dateRecive;
        }
        
+       //topchy 
+       
+
+
+//topchy
+       
+       
+       
+       
 
     //echo ((strtotime(date("Y-m-d")))-strtotime((date("Y-m-d", time() - 60 * 60 * 24))))/(60*60*24);
    
@@ -93,7 +124,7 @@ $sql="SELECT * FROM users WHERE userName=?";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo2.jpg">
     <title>המיחזורים שלי</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -117,79 +148,27 @@ $sql="SELECT * FROM users WHERE userName=?";
                 </a>
             </div>
             <div class="page-title-box pull-left">
-                <h3>מיחזורון</h3>
+               <span id="updateNumOfNotifications"></span>
+                <h3 >מיחזורון</h3>
             </div>
             <a id="mobile_btn" class="mobile_btn pull-left" href="#sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <ul class="nav user-menu pull-right">
                 <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right">3</span></a>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="notificationButton"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right" id="numOfNotifications"></span></a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
+                            <span>התראות</span>
                         </div>
                         <div class="drop-scroll">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
+                            <ul class="notification-list" id="notificationList">
+                                
+                              
+                
+                               
                             </ul>
                         </div>
                         <div class="topnav-dropdown-footer">
-                            <a href="activities.html">View all Notifications</a>
+                            <a href="notificationList.php">הצג הכל</a>
                         </div>
                     </div>
                 </li>
@@ -269,6 +248,11 @@ $sql="SELECT * FROM users WHERE userName=?";
                             עזרה            
                              </a>
                         </li>
+                        <li>
+                             <a href="faq.php"> <i class="far fa-question-circle"></i>
+                           שאלות ותשובות           
+                             </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -284,14 +268,13 @@ $sql="SELECT * FROM users WHERE userName=?";
                     <div class="col-sm-12">
                         <div class="card-box">
                             <div class="card-block">
-                                <h6 class="card-title text-bold">מיחזורים שקניתי</h6>
+                                <h6 class="card-title text-bold">מיחזורים שפרסמתי</h6>
                                 <p class="content-group">
-                                   כאן תוכל לצפות בכל המחזורים אשר קנית וליצור קשר עם בעלי הבקבוקים למיחזור.
-                               בעת איסוף הבקבוקים מסור את קוד בן 4 הספרות על מנת להשלים את התהליך.
+                             כאן תוכל לראות את המיחזורים שפרסמת ותוכל ליצור קשר עם הקונה.
                                 </p>
                                 <table class="datatable table table-stripped" id="dtable">
                                <div class="contacts-list col-sm-8 col-lg-9">
-                                                  <ul class="contact-list" id="feed">
+                                                 <!--<ul class="contact-list" id="feed">-->
                               
                               <thead>
                                         <tr>
@@ -319,7 +302,7 @@ $sql="SELECT * FROM users WHERE userName=?";
 
                                                                 <div class="contact-cont">
                                                             <div class="pull-left user-img m-r-10">
-                                                                <a href="profile.html" title="John Doe"><img src=
+                                                                <a href="profile.php" title=""><img src=
                                                                 '.$row['profilePic'].'
                                                                 alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                                             </div>
@@ -351,15 +334,35 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                 
                                                                 if($row['paid']==1)
                                                                 {
-                                                                  echo'  <span class="badge badge-success-border">
+                                                                  if($row['isConfirmed']==0)
+                                                                  {
+                                                                    echo'  <span class="badge badge-info-border">
                                                                   נרכש
                                                                   </span>
-                                                                  ' ;
+                                                                  ' ;  
+                                                                  }
+                                                                  
+                                                                  //
+                                                                     $sql="SELECT * from users WHERE userName='".$row['paidUser']."'";
+                                                       $result2=$conn-> query($sql);
+                                                       if($result2->num_rows>0)
+                                                       {
+                        
+                                                             $row2=$result2->fetch_assoc();
+                                                                echo "<br> שם הקונה: ". $row2["userName"]. "
+                                                                <br>
+                                                                 טלפון: ". $row2["tel"]. " "  . "<br>";
+                                                                                    
+                                                                                } else {
+                                                                                    echo "000 results";
+                                                                                }
+                                                                  
+                                                                  //
                                                                 }
                                                                 else
                                                                 {
                                                                  echo '  
-                                                                 <span class="badge badge-info-border">
+                                                                 <span class="badge badge-warning-border">
                                                                  באוויר
                                                                  </span>
                                                                  ';
@@ -377,32 +380,54 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                 מחק מיחזור
                                                                </a><br>';
                                                                }
-                                                              echo'
-                                                               <form action="" method="post">
+                                                              if($row['isConfirmed']==0)
+                                                              {
+                                                                echo'
+                                                               <!DOCTYPE HTML>
+                                                               <html>
+                                                               <head>
+                                                               </head>
+                                                               <body>
+                                                               <br>
+                                                              <form action="finish-deal.php" method="post">
                                                                <div class="form-group row form-focus">
-                                                               <input type="hidden" value="'.$row['id'].'">
-                                                               <label class="focus-label">קוד בין 4 ספרות</label>
+                                                               <input type="hidden" value="'.$row['id'].'" name="id">
+                                                               
+                                                               
+                                                               
                                                               <div class="col-xs-2">
-                                                               <input class="form-control input-sm" type="text" style="width:120px;height:40px;" name="fourCode" id="fourCode" placeholder="
-                                                               הזן קוד בין 4 ספרות לאישור
-                                                               ">
+                                                               <input class=" input-sm" type="text" style="width:80px;height:40px;" name="fourCode" id="fourCode" 
+                                                               placeholder="קוד 4 ספרות">
                                                                </div>
-                                                               <button class="btn btn-primary btn-sm" type="submit" name="fourDigitSubmit">
+                                                               <button class="btn btn-primary btn-sm" type="submit" style="height:40px" name="fourDigitSubmit">
                                                                אשר
                                                                </button>
                                                                </div>
                                                                </form>
-                                                               
+                                                               </body></html>
                                                               </td>
-                                                                  ';
+                                                              </tr>
+                                                                  ';  
+                                                              }
+                                                              else
+                                                              {
+                                                                echo'  <span class="badge badge-success-border">
+                                                                  הושלם
+                                                                  </span>';
+                                                              }
+                                                              
+                                                                  
+                                                          
+                                                                     
+                                                                        
+                                                                                                                                                    
+                                                                     
 
                                                            }
                                                        }
                                                            ?>
-                                        
-                                        
+                                    
                                        
-                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -421,6 +446,54 @@ $sql="SELECT * FROM users WHERE userName=?";
     <script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.slimscroll.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
+    <script>
+        var userName='<?php echo $_SESSION['userName']; ?>';
+
+         $(document).ready(function(){
+
+
+
+        setInterval(function()
+{ 
+
+   $("#numOfNotifications").load("http://eavni93.com/itay/notifications.php", {
+        action:"countNotifications",
+       userName:userName
+       
+        
+    });
+    
+      $("#notificationList").load("http://eavni93.com/itay/notifications.php", {
+                userName:userName,
+               action:"showNotifications"
+
+
+
+        
+    });
+
+
+
+},2000);
+
+//clear notifications after user clicked
+
+$("#notificationButton").click(function(){
+    
+    
+ $("#updateNumOfNotifications").load("http://eavni93.com/itay/notifications.php", {
+                userName:userName,
+               action:"clearNotifications"
+    
+});
+
+
+
+});
+         });
+    
+        
+    </script>
 </body>
 
 </html>

@@ -8,6 +8,7 @@ $userName=$_POST['userName'];
 
 
 
+
 $sql="SELECT * FROM users WHERE userName=?";
        $stmt=mysqli_stmt_init($conn);
       if(!mysqli_stmt_prepare($stmt,$sql))
@@ -28,15 +29,36 @@ $sql="SELECT * FROM users WHERE userName=?";
                 $userName= $row['userName'];
                 $email=$row['email'];
                 $path=$row['profilePic'];
+                $amountBot=$row['amountBot'];
             }
           
        }
        
-       if(isset($_GET))
-       {
-           if($_GET['delete']=='true' && $_GET['id']!= NULL)
+      if($_POST['delete2']=="true")
            {
-               $sql="UPDATE posts SET isDeleted=1 WHERE id='".$_GET['id']."'";
+                $sql="SELECT * FROM posts WHERE id='".$_POST['id']."'";
+        $result = mysqli_query($conn, $sql);
+        
+        if (mysqli_num_rows($result) == 0) {
+           
+            exit();
+        }
+        else 
+        {
+            $row = mysqli_fetch_assoc($result);
+            $amountA=$row['amountA'];
+            $amountB=$row['amountB'];
+            $sum=$amountA+$amountB;
+        }
+        $amountBot=$amountBot-$sum;
+        $sql="UPDATE users SET amountBot='".$amountBot."' WHERE userName='".$userName."'";
+        if ($conn->query($sql) == TRUE) {
+                
+                 } else {
+                
+                    }
+               
+               $sql="UPDATE posts SET isDeleted=1 WHERE userName='".$userName."' AND id='".$_POST['id']."'";
                if ($conn->query($sql) == TRUE) {
                 echo' 
                 <script>
@@ -49,7 +71,7 @@ $sql="SELECT * FROM users WHERE userName=?";
             
                  $conn->close();
            }
-       }
+       
      function getDateDiff($dateRecive)
       {
      
@@ -97,18 +119,18 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                            {
                                                                echo '
                                                               <tr>
-                                                              <td>'.$row['id'].'
+                                                              <td class="narrowInMobile">'.$row['id'].'
                                                               </td>
                                                               <td>
 
                                                                 <div class="contact-cont">
                                                             <div class="pull-left user-img m-r-10">
-                                                                <a href="profile.html" title="John Doe"><img src=
+                                                                <a href="profile.html" title=""><img src=
                                                                 '.$row['profilePic'].'
                                                                 alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                                             </div>
-                                                            <div class="contact-info">
-                                                                <span class="contact-name text-ellipsis">
+                                                            <div class="contact-info narrowInMobile">
+                                                                <span class="contact-date">
                                                                  '  
                                                                  .$row['userName'].'<br>'   .getDateDiff($row['date']).'
                                                                     
@@ -135,15 +157,34 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                 
                                                                 if($row['paid']==1)
                                                                 {
-                                                                  echo'  <span class="badge badge-success-border">
+                                                                 if($row['isConfirmed']==0)
+                                                                  {
+                                                                    echo'  <span class="badge badge-info-border">
                                                                   נרכש
                                                                   </span>
-                                                                  ' ;
+                                                                  ' ;  
+                                                                  }
+                                                                  $sql="SELECT * from users WHERE userName='".$row['paidUser']."'";
+                                                       $result2=$conn-> query($sql);
+                                                       if($result2->num_rows>0)
+                                                       {
+                        
+                                                             $row2=$result2->fetch_assoc();
+                                                                echo " <span class='contact-date'>
+                                                                שם הקונה: 
+                                                                </span><br>". $row2["userName"]. "
+                                                                <br>
+                                                                <span class='contact-date'>
+                                                                 טלפון:</span><br> ". $row2["tel"]. " "  . "<br>";
+                                                                                    
+                                                                                } else {
+                                                                                    echo "000 results";
+                                                                                }
                                                                 }
                                                                 else
                                                                 {
                                                                  echo '  
-                                                                 <span class="badge badge-info-border">
+                                                                 <span class="badge badge-warning-border">
                                                                  באוויר
                                                                  </span>
                                                                  ';
@@ -157,29 +198,44 @@ $sql="SELECT * FROM users WHERE userName=?";
                                                                </a><br>
                                                                
                                                               
-                                                                   <a href="myPosts.php?delete=true&id='.$row['id'].'" class="btn btn-white btn-sm m-t-10" ">
+                                                                   <a href="myPosts.html?delete2=true&id='.$row['id'].'" class="btn btn-white btn-sm m-t-10" >
                                                                 מחק מיחזור
                                                                </a><br>';
                                                                }
-                                                              echo'
-                                                               <form action="" method="post">
+                                                              if($row['isConfirmed']==0)
+                                                              {
+                                                                echo'
+                                                               <!DOCTYPE HTML>
+                                                               <html>
+                                                               <head>
+                                                               </head>
+                                                               <body>
+                                                               <br>
+                                                              <form action="finish-deal.html" >
                                                                <div class="form-group row form-focus">
-                                                               <input type="hidden" value="'.$row['id'].'">
-                                                               <label class="focus-label">קוד בין 4 ספרות</label>
+                                                               <input type="hidden" value="'.$row['id'].'" name="id">
+                                                               <input type="hidden" value="'.$row['userName'].'" name="userName">
                                                               <div class="col-xs-2">
-                                                               <input class="form-control input-sm" type="text" style="width:120px;height:40px;" name="fourCode" id="fourCode" placeholder="
-                                                               הזן קוד בין 4 ספרות לאישור
-                                                               ">
+                                                              
+                                                               <input class=" input-sm" type="text" style="width:80px;height:40px;" name="fourCode" id="fourCode" 
+                                                               placeholder="קוד 4 ספרות">
                                                                </div>
-                                                               <button class="btn btn-primary btn-sm" type="submit" name="fourDigitSubmit">
+                                                               <button class="btn btn-primary btn-sm" type="submit" style="height:40px" >
                                                                אשר
                                                                </button>
                                                                </div>
                                                                </form>
-                                                               
+                                                               </body></html>
                                                               </td>
                                                               </tr>
-                                                                  ';
+                                                                  ';  
+                                                              }
+                                                              else
+                                                              {
+                                                                echo'  <span class="badge badge-success-border">
+                                                                  הושלם
+                                                                  </span>';
+                                                              }
 
                                                            }
                                                        }
@@ -196,7 +252,15 @@ $sql="SELECT * FROM users WHERE userName=?";
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
- 
+ <style>
+     
+     @media only screen and (max-width: 600px) {
+  .narrowInMobile {
+      padding:0px;
+  }
+  
+}
+ </style>
     </head>
     <body>
        <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
@@ -206,7 +270,6 @@ $sql="SELECT * FROM users WHERE userName=?";
     <script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.slimscroll.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
-    <script> 
     </body>
 </html>
                                         

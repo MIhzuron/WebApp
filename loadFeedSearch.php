@@ -25,7 +25,7 @@ $userName=$_SESSION['userName'];
 
            <div class="contact-cont">
            <div class="pull-left user-img m-r-10">
-             <a href="profile.html" title="John Doe"><img src=
+             <a href="" title=""><img src=
           '.$row['profilePic'].'
            alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                </div>
