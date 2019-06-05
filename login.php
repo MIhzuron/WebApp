@@ -5,10 +5,7 @@ require_once('config.php');
 header('Content-type: text/html; charset=UTF-8');
 
 
-$conn=new mysqli($host,$user,$pass,$db);
-$conn->set_charset("utf8");
-if ($conn->connect_error){
-die("Connection failed: ".$conn->connect_error);}
+
 
 if (isset($_POST['loginButton']))
 {
@@ -100,7 +97,7 @@ else
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo2.jpg">
     <title>מיחזורון-התחבר לאתר</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -120,7 +117,7 @@ else
                 <div class="account-box">
                     <div class="account-wrapper">
                         <div class="account-logo">
-                            <a href="index.html"><img src="assets/img/logo.png" alt="Preadmin"></a>
+                            <a href="index.php"><img src="assets/img/logo2.jpg" alt=""></a>
                         </div>
                         <?php //show error messages to user when trying to log in
     
