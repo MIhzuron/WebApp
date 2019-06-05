@@ -61,7 +61,7 @@ $sql="SELECT * FROM users WHERE userName=?";
 
     //echo ((strtotime(date("Y-m-d")))-strtotime((date("Y-m-d", time() - 60 * 60 * 24))))/(60*60*24);
    
-  //         
+           
        
 }
 ?>
@@ -72,7 +72,7 @@ $sql="SELECT * FROM users WHERE userName=?";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo2.jpg">
     <title>דף הבית</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -92,47 +92,10 @@ $sql="SELECT * FROM users WHERE userName=?";
 	<![endif]-->
 	
 	
-	<script> 
-	/* ITAY-10.5- not sure this is needed
-window.onload = function () {
-
-var chart = new CanvasJS.Chart("chartContainer", {
-	width:100px,
-	animationEnabled: true,
-	theme: "light2",
-	
-	title:{
-		text: "Simple Line Chart"
-	},
-	axisY:{
-		includeZero: false
-	},
-	data: [{        
-		type: "line", 
-		
-		dataPoints: [
-			{ y: 450 },
-			{ y: 414},
-			{ y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
-			{ y: 460 },
-			{ y: 450 },
-			{ y: 500 },
-			{ y: 480 },
-			{ y: 480 },
-			{ y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
-			{ y: 500 },
-			{ y: 480 },
-			{ y: 510 }
-		]
-	}]
-});
-chart.render();
-
-}
-*/
 
 
-</script>
+
+
 </head>
 
 <body>
@@ -144,79 +107,27 @@ chart.render();
                 </a>
             </div>
             <div class="page-title-box pull-left">
+                <span id="updateNumOfNotifications"></span>
                 <h3 >מיחזורון</h3>
             </div>
             <a id="mobile_btn" class="mobile_btn pull-left" href="#sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <ul class="nav user-menu pull-right">
                 <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right" id="numOfNotifications"></span></a>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="notificationButton"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-primary pull-right" id="numOfNotifications"></span></a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
+                            <span>התראות</span>
                         </div>
                         <div class="drop-scroll">
                             <ul class="notification-list" id="notificationList">
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
+                                
+                              
+                
+                               
                             </ul>
                         </div>
                         <div class="topnav-dropdown-footer">
-                            <a href="activities.html">View all Notifications</a>
+                            <a href="notificationList.php">הצג הכל</a>
                         </div>
                     </div>
                 </li>
@@ -293,6 +204,11 @@ chart.render();
                          <li>
                              <a href="help.php"><i class="fa fa-info"></i>
                             עזרה            
+                             </a>
+                        </li>
+                        <li>
+                             <a href="faq.php"> <i class="far fa-question-circle"></i>
+                           שאלות ותשובות           
                              </a>
                         </li>
                     </ul>
@@ -437,7 +353,7 @@ chart.render();
                                                                
                                                         <div class="contact-cont">
                                                             <div class="pull-left user-img m-r-10">
-                                                                <a href="profile.html" title="John Doe"><img src=
+                                                                <a href="" title=""><img src=
                                                                 '.$row['profilePic'].' alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                                             </div>
                                                             
@@ -461,13 +377,6 @@ chart.render();
                                                     </li>
                                                               
                                                               
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
-                                                              
                                                               ';
                                                                
                                                            }
@@ -489,9 +398,14 @@ chart.render();
                         </div>
                     </div>
                     <div class="col-md-6">
-                          <div class="card activity-panel">
+                        <div class="card activity-panel">
                             <div class="card-body">
-                                <h4 class="card-title">הרמה שלך :</h4>
+                                <h4 class="card-title">מידע נוסף </h4>
+                                <div class="activity-box">
+                                    <ul class="activity-list">
+                                          <div class="contacts-list">
+                                                <ul class="contact-list">
+                                       <h4 class="card-title">הרמה שלך :</h4>
                                
                                   
                                         
@@ -499,16 +413,18 @@ chart.render();
                                                         
                                                
                                                if($sum<1&&$sum>=0){
-                                                           echo'<i class="fas fa-chess-pawn fa-10x"></i>';
-                                                           echo'<br> <h3>ממחזר מתחיל<h3>';
+                                                           echo'<i class="fas fa-chess-pawn fa-3x"></i>';
+                                                           echo'<br> <h4>
+                                                           ממחזר מתחיל
+                                                           <h4>';
                                                }
                                                            else if($sum>1&&$sum<=50){
-                                                            echo'<i class="fas fa-chess-knight fa-10x"></i>';
-                                                                 echo'<br> <h3>ממחזר מתקדם<h3>';
+                                                            echo'<i class="fas fa-chess-knight fa-3x"></i>';
+                                                                 echo'<br> <h4>ממחזר מתקדם<h4>';
                                                            }
                                                              else if($sum>50){
-                                                            echo'<i class="fas fa-chess-king fa-10x"></i>';
-                                                                 echo'<br> <h3>ממחזר מתקדם<h3>';
+                                                            echo'<i class="fas fa-chess-king fa-3x"></i>';
+                                                                 echo'<br> <h4>ממחזר מתקדם<h4>';
                                                              }
                                                             else{ echo $sum ;}
                                                              
@@ -516,26 +432,34 @@ chart.render();
                                                   </div> 
                                                 
                        <!-- גודל  -->       
-                     <div id="chartContainer" style="height: 370px;">
+                     
                          <hr>
-                         <br><br><br><br>
+                         
                          <h3> עזרה</h3>
-                         <a href="help.php"><i class="fa fa-info fa-5x"></i>
+                         <a href="help.php"><i class="fa fa-info fa-3x"></i>
                            <br> לחץ כאן לעזרה             
                              </a>
                              
-                             
-                         
-                         
-                     </div>
-                        
-                    
-                        
-                        
-                     
-                        
+                            <hr>
+                            <a href ="faq.php"><i class="far fa-question-circle fa-3x"></i>
+
+ <br>
+                            שאלות ותשובות
+                            </a>
+                                                </ul>
+                                            </div>                                      
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center bg-white">
+                                <a href="profile.php" class="text-muted">
+                           צפייה בפרופיל שלי
+                                </a>
+                            </div>
                         </div>
-                        </div>
+                    </div>
+                   
                         
                         </div>
                 </div>
@@ -588,12 +512,22 @@ chart.render();
 
 },2000);
 
+//clear notifications after user clicked
 
+$("#notificationButton").click(function(){
+    
+    
+ $("#updateNumOfNotifications").load("http://eavni93.com/itay/notifications.php", {
+                userName:userName,
+               action:"clearNotifications"
+    
+});
 
 
 
 });
-        
+         });
+    
         
     </script>
 </body>
