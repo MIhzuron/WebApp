@@ -241,7 +241,11 @@ $sql="SELECT * FROM users WHERE userName=?";
                                 <a href="#"><img class="img-fluid" src="assets/img/think.jpg" alt=""></a>
                             </div>
                             <div class="blog-content">
-                                
+                               <p>
+                                    לכל הסבר נוסף, ניתן לפנות בכל שעה למייל הבא:
+                               <br>
+                               <a href="mailto:eavnitayze@gmail.com">eavnitayze@gmail.com</a>
+                               </p> 
                        
                                 
                             </div>
