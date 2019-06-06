@@ -358,6 +358,17 @@ opacity:0.7;
  
       </p>
 </div>
+<button class="accordion">
+אם הייתי חלק ממירמה או בכללי רוצה ליצור קשר עם בעלי מיחזורון, כיצד אוכל לעשות זאת?
+</button>
+<div class="panel">
+  <p>
+
+אתם תמיד מוזמנים ליצור איתנו קשר עם המייל הבא
+<br>
+<a href="mailto:eavnitayze@gmail.com">eavnitayze@gmail.com</a>
+      </p>
+</div>
 
 
 
